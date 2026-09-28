@@ -751,6 +751,11 @@ section {
     background: linear-gradient(135deg, #ede4ff, #f6e6c8);
 }
 
+/* Keep the face visible in the tall fifth portrait. */
+.photo:nth-child(5) img {
+    object-position: center 35%;
+}
+
 .photo-caption {
     position: absolute;
     bottom: 12px;
