@@ -107,12 +107,20 @@ setTimeout(typeWriter, 3500);
   ========================== */
 const music = document.getElementById("music");
 const startBtn = document.getElementById("startBtn");
+const MUSIC_START_TIME = 3;
 
 /* Request playback as soon as the script is ready. The autoplay attribute
    also lets browsers that permit audible autoplay start it natively. */
 music.volume = 0.7;
 
+function skipSilentIntro() {
+    if (music.readyState >= 1 && music.currentTime < MUSIC_START_TIME) {
+        music.currentTime = MUSIC_START_TIME;
+    }
+}
+
 function playMusic() {
+    skipSilentIntro();
     const playPromise = music.play();
     if (playPromise !== undefined) {
         playPromise.catch(() => {
@@ -122,6 +130,13 @@ function playMusic() {
 }
 
 playMusic();
+
+/* As soon as duration metadata is available, jump past the quiet intro and
+   retry playback instead of waiting for the whole file to buffer. */
+music.addEventListener("loadedmetadata", () => {
+    skipSilentIntro();
+    playMusic();
+}, { once: true });
 
 /* Retry once the MP3 has buffered enough. This helps on slower connections
    where the first play request happens before the audio is ready. */
@@ -147,6 +162,11 @@ document.addEventListener("visibilitychange", () => {
 
 music.addEventListener("pause", () => {
     if (!document.hidden) setTimeout(keepMusicPlaying, 250);
+});
+
+/* The loop normally returns to 0, so skip the same silent intro each time. */
+music.addEventListener("timeupdate", () => {
+    if (music.currentTime < 0.25) skipSilentIntro();
 });
 
 startBtn.addEventListener("click", (e) => {
