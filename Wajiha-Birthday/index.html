@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Wajiha 🎉</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Scroll Progress Bar -->
+    <div id="progressBar"></div>
+
+    <!-- Loading Screen -->
+    <div id="loader">
+        <div class="loader-content">
+            <div class="loader-icon">🎂</div>
+            <h1>Preparing Your Surprise</h1>
+            <div class="loading-bar">
+                <div class="loading"></div>
+            </div>
+            <p class="loader-sub">Hang tight...</p>
+        </div>
+    </div>
+
+    <!-- Music -->
+    <audio id="music" autoplay loop preload="auto" playsinline>
+        <source src="music/birthday.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Back To Top -->
+    <button id="backToTop" aria-label="Back to top" title="Back to top">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+    </button>
+
+    <!-- Canvas Layers -->
+    <canvas id="starsCanvas"></canvas>
+    <canvas id="canvas"></canvas>
+
+    <!-- Floating Sparkles + Confetti bits -->
+    <div class="spark-container"></div>
+    <div class="balloon-container" id="balloonContainer"></div>
+
+    <!-- Navbar -->
+    <nav id="navbar">
+        <div class="logo">🎓 <span class="logo-name">Wajiha</span></div>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul id="navLinks">
+            <li><a href="#home" class="nav-link">Home</a></li>
+            <li><a href="#timeline" class="nav-link">Journey</a></li>
+            <li><a href="#gallery" class="nav-link">Gallery</a></li>
+            <li><a href="#letter" class="nav-link">Letter</a></li>
+            <li><a href="#counter" class="nav-link">Friendship</a></li>
+            <li><a href="#surprise" class="nav-link">Surprise</a></li>
+        </ul>
+    </nav>
+
+    <!-- ================= HERO ================= -->
+    <section class="hero" id="home">
+        <div class="hero-orb hero-orb-1"></div>
+        <div class="hero-orb hero-orb-2"></div>
+
+        <div class="hero-inner">
+            <div class="birthday-badge">
+                <span class="badge-dot"></span>
+                It's Wajiha's Big Day
+            </div>
+
+            <h3 class="hero-script">Happy Birthday</h3>
+
+            <div class="typing-wrap">
+                <h1 id="typing"></h1><span class="cursor-blink" id="cursorBlink">|</span>
+            </div>
+
+            <div class="hero-divider">
+                <span></span>
+                <div class="hero-divider-icon">🎓</div>
+                <span></span>
+            </div>
+
+            <p class="hero-text">
+                From packed lecture halls to the longest canteen chats —<br>
+                university would've been so much duller without you.
+            </p>
+
+            <button id="startBtn" class="btn-primary">
+                <span>Begin The Journey</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+            </button>
+        </div>
+
+        <div class="scroll-hint" id="scrollHint">
+            <div class="mouse"><div class="mouse-wheel"></div></div>
+            <span>Scroll</span>
+        </div>
+    </section>
+
+    <!-- ================= TIMELINE ================= -->
+    <section id="timeline">
+        <p class="section-eyebrow">Chapter by chapter</p>
+        <h2 class="section-title">Our Journey</h2>
+
+        <div class="journey">
+            <div class="journey-line"></div>
+
+            <div class="journey-item">
+                <div class="journey-dot">🎓</div>
+                <div class="journey-card">
+                    <span class="journey-tag">The Beginning</span>
+                    <h3>The Day We Met</h3>
+                    <p>Two strangers in a lecture hall, no idea we were about to become each other's favorite part of university.</p>
+                </div>
+            </div>
+
+            <div class="journey-item">
+                <div class="journey-dot">💬</div>
+                <div class="journey-card">
+                    <span class="journey-tag">Instant Click</span>
+                    <h3>First Real Conversation</h3>
+                    <p>One conversation turned into a hundred inside jokes and a friendship that just made sense.</p>
+                </div>
+            </div>
+
+            <div class="journey-item">
+                <div class="journey-dot">📚</div>
+                <div class="journey-card">
+                    <span class="journey-tag">Study Squad</span>
+                    <h3>Group Projects & Canteen Runs</h3>
+                    <p>Late-night assignments, last-minute exam panic, and canteen chai breaks that fixed everything.</p>
+                </div>
+            </div>
+
+            <div class="journey-item">
+                <div class="journey-dot">🎂</div>
+                <div class="journey-card">
+                    <span class="journey-tag">Today</span>
+                    <h3>Your Birthday</h3>
+                    <p>Celebrating one of the kindest, funniest people university ever gave me.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= GALLERY ================= -->
+    <section id="gallery">
+        <p class="section-eyebrow">Frozen in time</p>
+        <h2 class="section-title">Our Memories</h2>
+
+        <div class="gallery">
+            <div class="photo"><img src="images/pic1.jpg" alt="Memory with Wajiha 1" loading="lazy"><div class="photo-caption">Memory #1</div></div>
+            <div class="photo"><img src="images/pic2.jpg" alt="Memory with Wajiha 2" loading="lazy"><div class="photo-caption">Memory #2</div></div>
+            <div class="photo"><img src="images/pic3.jpg" alt="Memory with Wajiha 3" loading="lazy"><div class="photo-caption">Memory #3</div></div>
+            <div class="photo"><img src="images/pic4.jpg" alt="Memory with Wajiha 4" loading="lazy"><div class="photo-caption">Memory #4</div></div>
+            <div class="photo"><img src="images/pic5.jpg" alt="Memory with Wajiha 5" loading="lazy"><div class="photo-caption">Memory #5</div></div>
+            <div class="photo"><img src="images/pic6.jpg" alt="Memory with Wajiha 6" loading="lazy"><div class="photo-caption">Memory #6</div></div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous">&#10094;</button>
+        <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next">&#10095;</button>
+        <img src="" alt="Preview" id="lightboxImg">
+        <div class="lightbox-counter" id="lightboxCounter">1 / 6</div>
+    </div>
+
+    <!-- ================= LETTER ================= -->
+    <section id="letter">
+        <p class="section-eyebrow">From the heart</p>
+        <h2 class="section-title">A Letter For You</h2>
+
+        <div class="envelope">
+            <div class="envelope-seal" id="envelopeSeal">📜</div>
+            <button id="openLetter" class="btn-primary">
+                <span>Open The Letter</span>
+            </button>
+            <div id="message">
+                <div class="letter-paper">
+                    <h3>Dear Wajiha</h3>
+                    <p>
+                        Happy Birthday to someone who's made university a lot more fun.<br><br>
+                        Thank you for the good conversations, the laughs, and always
+                        being easy to be around.<br><br>
+                        Hope this year brings you everything you're working towards.<br><br>
+                        Have a great one!
+                    </p>
+                    <div class="letter-sign">Wishing you the best 🎉</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FRIENDSHIP COUNTER ================= -->
+    <section id="counter">
+        <p class="section-eyebrow">Every second counts</p>
+        <h2 class="section-title">Our Friendship</h2>
+
+        <div class="counter-box">
+            <div class="counter-grid">
+                <div class="counter-unit">
+                    <span class="counter-num" id="counterDays">000</span>
+                    <span class="counter-label">Days</span>
+                </div>
+                <div class="counter-sep">:</div>
+                <div class="counter-unit">
+                    <span class="counter-num" id="counterHours">00</span>
+                    <span class="counter-label">Hours</span>
+                </div>
+                <div class="counter-sep">:</div>
+                <div class="counter-unit">
+                    <span class="counter-num" id="counterMins">00</span>
+                    <span class="counter-label">Minutes</span>
+                </div>
+                <div class="counter-sep">:</div>
+                <div class="counter-unit">
+                    <span class="counter-num" id="counterSecs">00</span>
+                    <span class="counter-label">Seconds</span>
+                </div>
+            </div>
+            <p class="counter-tagline">Since the day we became friends 🎓</p>
+        </div>
+    </section>
+
+    <!-- ================= REASONS (FLIP CARDS) ================= -->
+    <section id="reasons">
+        <p class="section-eyebrow">Tap each card</p>
+        <h2 class="section-title">Why You're The Best</h2>
+
+        <div class="reasons">
+            <div class="flip-card">
+                <div class="flip-inner">
+                    <div class="flip-front"><span>😂</span><p>Reason #1</p></div>
+                    <div class="flip-back"><p>Your humor turns even the dullest lecture into a memory worth keeping</p></div>
+                </div>
+            </div>
+            <div class="flip-card">
+                <div class="flip-inner">
+                    <div class="flip-front"><span>🤝</span><p>Reason #2</p></div>
+                    <div class="flip-back"><p>You're honest, dependable, and easy to talk to</p></div>
+                </div>
+            </div>
+            <div class="flip-card">
+                <div class="flip-inner">
+                    <div class="flip-front"><span>📚</span><p>Reason #3</p></div>
+                    <div class="flip-back"><p>You made exam stress and deadlines somehow survivable</p></div>
+                </div>
+            </div>
+            <div class="flip-card">
+                <div class="flip-inner">
+                    <div class="flip-front"><span>🌟</span><p>Reason #4</p></div>
+                    <div class="flip-back"><p>Your energy lifts every room and every bad day you walk into</p></div>
+                </div>
+            </div>
+            <div class="flip-card">
+                <div class="flip-inner">
+                    <div class="flip-front"><span>🎉</span><p>Reason #5</p></div>
+                    <div class="flip-back"><p>Genuinely one of a kind — happy birthday, Wajiha</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SURPRISE ================= -->
+    <section id="surprise">
+        <p class="section-eyebrow">One last thing...</p>
+        <h2 class="section-title">A Surprise For You</h2>
+
+        <div class="surprise-wrap">
+            <div class="gift-box" id="giftBox" title="Click me!">
+                <div class="gift-lid"></div>
+                <div class="gift-body"></div>
+            </div>
+            <button id="surpriseBtn" class="btn-primary">
+                <span>Open Your Gift 🎁</span>
+            </button>
+        </div>
+
+        <div id="finalMessage">
+            <div class="cake" id="cake" title="Click the flame to blow it out!">
+                <div class="cake-candle">
+                    <div class="cake-flame" id="cakeFlame"></div>
+                    <div class="cake-smoke" id="cakeSmoke"></div>
+                </div>
+                <div class="cake-top"></div>
+                <div class="cake-middle"></div>
+                <div class="cake-bottom"></div>
+                <div class="cake-plate"></div>
+            </div>
+            <p class="cake-hint" id="cakeHint">🕯️ Click the flame &amp; make a wish</p>
+
+            <div id="wishMessage">
+                <h1>Happy Birthday Wajiha 🎉</h1>
+                <p>
+                    May this year bring you every win you're chasing.<br>
+                    May your laugh stay just as loud.<br><br>
+                    Thank you for being one of the good parts of my university life.<br><br>
+                    <em>Have an amazing day 🎓</em>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Made with ❤️ for Wajiha</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
