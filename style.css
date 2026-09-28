@@ -98,6 +98,26 @@ body {
     text-transform: uppercase;
 }
 
+.loader-enter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 22px;
+    padding: 13px 24px;
+    border: 0;
+    border-radius: 999px;
+    color: #fff;
+    background: linear-gradient(135deg, #8b5cf6, #f59e0b);
+    box-shadow: 0 10px 28px rgba(139, 92, 246, 0.3);
+    font: 600 14px 'Poppins', sans-serif;
+    cursor: pointer;
+    animation: pulseBeat 1.4s ease-in-out infinite;
+}
+
+.loader-enter[hidden] { display: none; }
+
+#loader.ready .loading-bar { display: none; }
+
 .loading-bar {
     width: min(300px, 78vw);
     height: 3px;

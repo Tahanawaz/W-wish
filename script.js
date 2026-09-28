@@ -6,14 +6,35 @@
 /* ==========================
    LOADER
 ========================== */
+let pageRevealed = false;
+
 window.addEventListener("load", () => {
-    setTimeout(() => {
-        const loader = document.getElementById("loader");
+    const loader = document.getElementById("loader");
+    const enterSurprise = document.getElementById("enterSurprise");
+    const loaderSub = loader.querySelector(".loader-sub");
+
+    const revealSurprise = () => {
+        pageRevealed = true;
         loader.classList.add("hidden");
         setTimeout(() => {
             loader.style.display = "none";
         }, 900);
-        playMusic();
+    };
+
+    enterSurprise.addEventListener("click", async () => {
+        if (await playMusic()) revealSurprise();
+    });
+
+    setTimeout(async () => {
+        if (await playMusic()) {
+            revealSurprise();
+            return;
+        }
+
+        /* Chrome/Safari may require one gesture before audible playback. */
+        loader.classList.add("ready");
+        loaderSub.textContent = "Tap once to start the music";
+        enterSurprise.hidden = false;
     }, 3200);
 });
 
@@ -82,7 +103,7 @@ function updateProgress() {
 /* ==========================
    TYPEWRITER EFFECT
 ========================== */
-const TYPE_TEXT = "To Dear Wajiha 🎓";
+const TYPE_TEXT = "To Dear Wajiha 🎂❤️";
 const typingEl = document.getElementById("typing");
 const cursorBlink = document.getElementById("cursorBlink");
 let typeIndex = 0;
@@ -109,8 +130,7 @@ const music = document.getElementById("music");
 const startBtn = document.getElementById("startBtn");
 const MUSIC_START_TIME = 3;
 
-/* Request playback as soon as the script is ready. The autoplay attribute
-   also lets browsers that permit audible autoplay start it natively. */
+/* Preload during the loader, then start at the exact reveal moment. */
 music.volume = 0.7;
 
 function skipSilentIntro() {
@@ -123,31 +143,20 @@ function playMusic() {
     skipSilentIntro();
     const playPromise = music.play();
     if (playPromise !== undefined) {
-        playPromise.catch(() => {
-            /* The next visitor interaction will retry if autoplay was blocked. */
-        });
+        return playPromise.then(() => true).catch(() => false);
     }
+    return Promise.resolve(!music.paused);
 }
 
-playMusic();
-
-/* As soon as duration metadata is available, jump past the quiet intro and
-   retry playback instead of waiting for the whole file to buffer. */
+/* Prepare the starting point while the loader is visible. */
 music.addEventListener("loadedmetadata", () => {
     skipSilentIntro();
-    playMusic();
-}, { once: true });
-
-/* Retry once the MP3 has buffered enough. This helps on slower connections
-   where the first play request happens before the audio is ready. */
-music.addEventListener("canplay", () => {
-    if (music.paused) playMusic();
 }, { once: true });
 
 /* Audible autoplay can be blocked by the browser. Any interaction unlocks
    it automatically; there is deliberately no pause/off control on the page. */
 const keepMusicPlaying = () => {
-    if (music.paused) playMusic();
+    if (pageRevealed && music.paused) playMusic();
 };
 
 ["pointerdown", "click", "touchstart", "keydown"].forEach((eventName) => {
@@ -161,7 +170,7 @@ document.addEventListener("visibilitychange", () => {
 });
 
 music.addEventListener("pause", () => {
-    if (!document.hidden) setTimeout(keepMusicPlaying, 250);
+    if (pageRevealed && !document.hidden) setTimeout(keepMusicPlaying, 250);
 });
 
 /* The loop normally returns to 0, so skip the same silent intro each time. */
